@@ -95,6 +95,7 @@ class Movie(models.Model):
     def get_absolute_url(self):
         return ('arthouse:movie_detail_url', [self.pk])
 
+
 class Theater(models.Model):
     """
     A ``Theater`` is a particular screening room at a cinema location where 

@@ -95,6 +95,22 @@ class AccountCreateView(CreateView):
     success_url = reverse_lazy('arthouse:home_url')
 
 
+class MovieCreate(LoginRequiredMixin, CreateView):
+    """
+    Create a ``Movie``.
+    """
+    model = models.Movie
+    template_name = 'movie/create.html'
+    form_class = forms.MovieCreateForm
+    success_url = reverse_lazy('arthouse:movie_list_url')
+
+    def form_valid(self, form):
+        """
+        Add success message when the form is valid.
+        """
+        messages.add_message(self.request, messages.SUCCESS, 'You have successfully created a new movie.')
+        return super(MovieCreate, self).form_valid(form)
+
 
 class MovieDetail(DetailView):
     """

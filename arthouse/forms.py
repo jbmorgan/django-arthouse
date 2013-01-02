@@ -20,3 +20,11 @@ class UserUpdateForm(BootstrapPasswordChangeForm):
         if len(password1) < 6:
             raise ValidationError('Password must be at least 6 characters long.')
         return super(UserUpdateForm, self).clean_new_password2()
+
+class MovieCreateForm(BootstrapModelForm):
+    """
+    Used by ``MovieCreateView`` to allow users to create a new ``Movie``.
+    """
+
+    class Meta:
+        model = models.Movie

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load url from future %}
+
+{% block content %}
+    <div class="row">
+        <div class="span12">
+            <form class="form form-horizontal" method="post" action="{% url 'arthouse:movie_create_url' %}">
+                {% csrf_token %}
+                <legend>Add a Movie</legend>
+                {{ form }}
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
