@@ -1,1 +1,1 @@
-READ ME, SUCKAsssssss
+# django-arthouse
