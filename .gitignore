@@ -14,3 +14,6 @@ pip-log.txt
 banners/
 posters/
 tiles/
+
+# secrets?
+secrets.py

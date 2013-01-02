@@ -48,11 +48,11 @@ class Movie(models.Model):
         verbose_name_plural = 'Movies' 
 
     FILM_RATINGS = (
-        ('G',       'General Audiences'),
-        ('PG',      'Parental Guidance Suggested'),
-        ('PG13',    'Parents Strongly Cautioned'),
-        ('R',       'Restricted'),
-        ('NC17',    'No One 17 and Under Admitted'),
+        ('G',       'G'),
+        ('PG',      'PG'),
+        ('PG13',    'PG-13'),
+        ('R',       'R'),
+        ('NC17',    'NC-17'),
         ('NR',      'Not Rated'),
     )
 
@@ -94,6 +94,26 @@ class Movie(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('arthouse:movie_detail_url', [self.pk])
+
+class Theater(models.Model):
+    """
+    A ``Theater`` is a particular screening room at a cinema location where 
+    movies and special events can take place. ``Theater``s are primarily used
+    for scheduling ``Showtime``s.
+    """
+    class Meta:
+        verbose_name = 'Theater'
+        verbose_name_plural = 'Theaters' 
+
+    name        = models.CharField(max_length=32)
+
+    def __unicode__(self):
+        return unicode(self.name)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('arthouse:movie_detail_url', [self.pk])
+
 
 class TicketType(models.Model):
     """
