@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load url from future %}
+
+{% block title %} - Homepage{% endblock %}
+
+{% block content %}
+    <div class="hero-unit">
+        <h1>Headline goes here</h1>
+        <p>
+        	Bloobity blah blah blah ARTHOUSE!!!
+        </p>
+        <p>
+        	<a href="{% url 'arthouse:account_create_url' %}" class="btn btn-primary btn-large">
+        		Get started »
+        	</a>
+        </p>
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load url from future %}
+
+{% block title %}Create an Account{% endblock %}
+
+{% block content %}
+    <form action="{% url 'arthouse:account_create_url' %}" method="POST">{% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+{% endblock %}

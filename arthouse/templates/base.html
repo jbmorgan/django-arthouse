@@ -1,0 +1,92 @@
+{% load url from future %}
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Theater Name{% block title %}{% endblock title %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        {% block head_meta %}{% endblock head_meta %}
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" />
+
+        {% block head_css %}{% endblock head_css %}
+
+        {% block head_js %}{% endblock head_js %}
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+
+                    <a class="brand" href="{% url 'arthouse:home_url' %}">Theater Name</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li><a href="{% url 'arthouse:about_url' %}">About</a></li>
+                            {% if user.is_authenticated %}
+                                <li><a href="#">AuthenticatedOption1</a></li>
+                                <li><a href="#">AuthenticatedOption2</a></li>
+                            {% endif %}
+                        </ul>
+
+                        {% if user.is_authenticated %}
+                            <ul class="nav pull-right">
+                                <li><a href="{% url 'arthouse:account_update_url' %}">Update Account</a></li>
+                                <li><a href="{% url 'arthouse:logout_url' %}">Log Out</a></li>
+                            </ul>
+                        {% else %}
+                            <form class="navbar-form pull-right" action="{% url 'arthouse:login_url' %}" method="POST">
+                                {% csrf_token %}
+                                <input class="span2" type="text" placeholder="Username" name="username">
+                                <input class="span2" type="password" placeholder="Password" name="password">
+                                <button type="submit" class="btn">Login</button>
+                            </form>
+                            <ul class="nav pull-right"><li><a href="{% url 'arthouse:account_create_url' %}">Register</a></li></ul>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <a href="#" class="close" data-dismiss="alert">×</a>
+                    {{ message|safe }}
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            {% block content %}{% endblock content %}
+
+            <hr>
+
+            <footer>
+                <p>&copy; Jonathan Morgan 2012</p>
+            </footer>
+
+        </div> <!-- /container -->
+
+        <script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
+
+        <script src="{{ STATIC_URL }}js/main.js"></script>
+
+        {% block body_js %}{% endblock body_js %}
+    </body>
+</html>

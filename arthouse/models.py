@@ -91,6 +91,9 @@ class Movie(models.Model):
     def __unicode__(self):
         return u'%s (%i)' % (self.title, self.year)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('arthouse:movie_detail_url', [self.pk])
 
 class TicketType(models.Model):
     """

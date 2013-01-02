@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load url from future %}
+
+{% block content %}
+
+<ul>
+	{% for movie in movies %}
+		<li>
+			<a href="{{ movie.get_absolute_url }}">
+				{{ movie.title }}
+			</a>
+		</li>
+	{% empty %}
+    <li>No movies exist in the system.</li>
+{% endfor %}
+</ul>
+{% endblock content %}
