@@ -1,0 +1,11 @@
+*.py[co]
+
+# Files
+*.db
+*.sqlite
+
+# Installer logs
+pip-log.txt
+
+# Mac
+.DS_Store
