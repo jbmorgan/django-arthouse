@@ -9,3 +9,8 @@ pip-log.txt
 
 # Mac
 .DS_Store
+
+# image directories
+banners/
+posters/
+tiles/
