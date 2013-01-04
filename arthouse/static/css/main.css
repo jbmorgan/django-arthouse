@@ -1,4 +1,19 @@
 body {
-  padding-top: 60px;
-  padding-bottom: 40px;
+  padding-top: 		60px;
+  padding-bottom:	40px;
+}
+
+.film-search-results {
+	padding-bottom: 10px;
+	padding-top: 	10px;
+	height: 		136px;
+	border-top:	1px solid #dddddd;
+}
+
+.film-search-results img {
+	max-height: 136px;
+}
+
+.film-search-results .title {
+	font-size: 20px;
 }

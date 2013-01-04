@@ -1,11 +1,23 @@
 {% extends "base.html" %}
 
 {% load url from future %}
+{% block title %} - Add a Movie{% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="row" id="row-searchbox">
+        <div class="span12" id="id-searchbox-left">
+          <form class="form-search" id="id-search-form">
+            <legend>Search for a film</legend>
+            <input type="text" class="input-large search-query" placeholder="Enter a film title…" id="id-film-title-search">
+            <button type="button" class="btn" id="id-form-autofill-button">Search</button>
+          </form>
+        </div>
+    </div>
+    <div class="container" id="id-results-container">
+    </div>
+    <div class="row" id="row-movie-form">
         <div class="span12">
-            <form class="form form-horizontal" method="post" action="{% url 'arthouse:movie_create_url' %}">
+            <form class="form form-horizontal hide" method="post" action="{% url 'arthouse:movie_create_url' %}">
                 {% csrf_token %}
                 <legend>Add a Movie</legend>
                 {{ form }}
@@ -15,6 +27,45 @@
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
 {% endblock content %}
+
+{% block body_js %}
+    <script>
+        !function ($) {
+            $("#id-form-autofill-button").click(function () {
+
+              var api_key = "21bb13074f05c64c1ec91b6d17b9535f";
+              var film = $("#id-film-title-search").val().replace(" ", "+"); 
+              var tmdb_base_uri = "http://api.themoviedb.org/2.1/Movie.search/en/json/"
+
+              $.getJSON(tmdb_base_uri + api_key + "/" + film + "?callback=?", function(json) {
+                console.log(json);
+
+                var $results_div = $("#id-results-container");
+                $results_div.empty();
+
+                $(json).each(function (index, element) {
+
+                  var poster_src = "",
+                      title = element.name,
+                      release_date = element.released,
+                      description = element.overview;
+
+                  if(description.length > 350)
+                    description = description.substring(0,350) + "…";
+
+
+                  if(element.posters.length > 0)
+                    poster_src = element.posters[0].image.url;
+
+                  $results_div.append("<div class='row film-search-results'><div class='span2'><img src='" + poster_src + "'></div><div class='span8'><p class='title'>" + title + "</p> <p>Release date: " + release_date + "</p><p>" + description + "</p></div><div class='span2'><button type='button' class='btn btn-large btn-primary'>Select</button></div></div>");
+                });
+
+              });
+            });
+        }(window.jQuery)
+    </script>
+{% endblock body_js %}
