@@ -11,30 +11,28 @@
             <input type="text" class="input-large search-query" placeholder="Enter a film title…" id="id-film-title-search">
             <button type="button" class="btn" id="id-form-autofill-button">Search</button>
           </form>
-        </div>
-    </div>
-    <div class="container" id="id-results-container">
-    </div>
-    <div class="row" id="row-movie-form">
-        <div class="span12">
-            <form class="form form-horizontal hide" method="post" action="{% url 'arthouse:movie_create_url' %}">
+
+          <form class="hide" method="post" action="{% url 'arthouse:movie_create_url' %}">
                 {% csrf_token %}
-                <legend>Add a Movie</legend>
                 {{ form }}
                 <div class="control-group">
                     <div class="controls">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary btn-film-submit">Create</button>
                     </div>
                 </div>
             </form>
 
         </div>
     </div>
+    <div class="container" id="id-results-container">
+    </div>
 {% endblock content %}
 
 {% block body_js %}
     <script>
         !function ($) {
+
+            //runs when the user searches for a film title
             $("#id-form-autofill-button").click(function () {
 
               var api_key = "21bb13074f05c64c1ec91b6d17b9535f";
@@ -52,20 +50,39 @@
                   var poster_src = "",
                       title = element.name,
                       release_date = element.released,
-                      description = element.overview;
+                      description = element.overview,
+                      tmdb_id = element.id;
 
                   if(description.length > 350)
                     description = description.substring(0,350) + "…";
 
-
                   if(element.posters.length > 0)
                     poster_src = element.posters[0].image.url;
 
-                  $results_div.append("<div class='row film-search-results'><div class='span2'><img src='" + poster_src + "'></div><div class='span8'><p class='title'>" + title + "</p> <p>Release date: " + release_date + "</p><p>" + description + "</p></div><div class='span2'><button type='button' class='btn btn-large btn-primary'>Select</button></div></div>");
+                  $results_div.append("<div class='row film-search-results'><div class='span2'><img src='" + poster_src + "'></div><div class='span8'><p class='title'>" + title + "</p> <p>Release date: " + release_date + "</p><p>" + description + "</p></div><div class='span2'><button type='button' class='btn btn-large btn-primary btn-film-select' id='" + tmdb_id + "'>Select</button></div></div>");
                 });
 
               });
             });
+
+            //runs when the user selects a film to add
+            $("body").on('click', ".btn-film-select", function(e) {
+
+              //get the full info from TMDB
+              var tmdb_base_uri = "http://api.themoviedb.org/3/movie/"
+              var api_key = "21bb13074f05c64c1ec91b6d17b9535f";
+              var tmdb_id = $(e.target).attr('id');
+
+              $.getJSON(tmdb_base_uri + tmdb_id + "?api_key=" + api_key + "&callback=?", function(json) {
+                // console.log(json);
+                $("#id_tmdb_id").val(tmdb_id);
+                // console.log($("#id_tmdb_id").val());
+                //submit the form
+                $(".btn-film-submit").click();
+              });
+
+            });
+
         }(window.jQuery)
     </script>
 {% endblock body_js %}

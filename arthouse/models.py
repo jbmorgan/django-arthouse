@@ -59,15 +59,16 @@ class Movie(models.Model):
     title           = models.CharField(max_length=200)
     description     = models.TextField(u'description')
     slug            = models.SlugField()
+    genres          = models.CharField(max_length=200)
 
     length          = models.IntegerField()
     year            = models.IntegerField()
-    rating          = models.CharField(max_length=4, choices=FILM_RATINGS)
-    language        = models.CharField(max_length=200)
+    rating          = models.CharField(max_length=12)
+    languages       = models.CharField(max_length=200)
 
-    directors       = models.ManyToManyField(Person, related_name="directors")
-    writers         = models.ManyToManyField(Person, related_name="writers")
-    cast            = models.ManyToManyField(Person, related_name="cast")
+    directors       = models.CharField(max_length=512)
+    writers         = models.CharField(max_length=512)
+    cast            = models.CharField(max_length=512)
 
     poster_image    = models.ImageField(    u'poster image', 
                                             upload_to='posters', 

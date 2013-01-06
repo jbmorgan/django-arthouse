@@ -11,14 +11,12 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotAllow
 from django.conf import settings
 
 # views
-from django.views.generic import View, CreateView, UpdateView, DetailView, ListView, TemplateView, DeleteView
+from django.views.generic import View, FormView, CreateView, UpdateView, DetailView, ListView, TemplateView, DeleteView
 
 # models
-from arthouse import models
+from arthouse import models, forms
 
-# forms
-from arthouse import forms
-
+from arthouse.tmdb import movie_for_tmdb_id
 # decorators
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -95,21 +93,30 @@ class AccountCreateView(CreateView):
     success_url = reverse_lazy('arthouse:home_url')
 
 
-class MovieCreate(LoginRequiredMixin, CreateView):
+class MovieCreateView(LoginRequiredMixin, FormView):
     """
     Create a ``Movie``.
     """
-    model = models.Movie
     template_name = 'movie/create.html'
-    form_class = forms.MovieCreateForm
+    form_class = forms.TMDBMovieCreateForm
     success_url = reverse_lazy('arthouse:movie_list_url')
 
     def form_valid(self, form):
         """
         Add success message when the form is valid.
         """
-        messages.add_message(self.request, messages.SUCCESS, 'You have successfully created a new movie.')
-        return super(MovieCreate, self).form_valid(form)
+        # look up the movie on TMDB
+        # download the poster image
+        # instantiate a ``MovieCreateForm`` with the movie's data
+        # validate the form
+        # save the ``Movie``
+
+        tmdb_id = form.cleaned_data.get('tmdb_id', None)
+        print tmdb_id
+        movie = movie_for_tmdb_id(tmdb_id)
+
+        messages.add_message(self.request, messages.SUCCESS, 'You SIKE SIKE SIKE have successfully created a new movie.')
+        return super(MovieCreateView, self).form_valid(form)
 
 
 class MovieDetail(DetailView):

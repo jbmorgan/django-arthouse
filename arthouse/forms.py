@@ -1,4 +1,5 @@
 from django.forms import Form, ModelForm, ValidationError
+from django import forms
 
 from bootstrapforms import BootstrapForm, BootstrapModelForm, BootstrapUserCreationForm, BootstrapPasswordChangeForm
 
@@ -28,3 +29,6 @@ class MovieCreateForm(BootstrapModelForm):
 
     class Meta:
         model = models.Movie
+
+class TMDBMovieCreateForm(Form):
+    tmdb_id = forms.CharField(max_length=200)
