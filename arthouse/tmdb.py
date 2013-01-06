@@ -11,6 +11,10 @@ from django.core.files.temp import NamedTemporaryFile
 
 
 def get_movie_details_dict(tmdb_id):
+    """
+    Gets a dictionary with the general information, cast, crew, and release
+    information for the movie with the specified TMDB ID.
+    """
     if not secrets.TMDB_API_KEY:
         raise ValueError("TMDB_API_KEY is not set!")
 
@@ -24,6 +28,9 @@ def get_movie_details_dict(tmdb_id):
     return response_json
 
 def tmdb_img_base_url():
+    """
+    Gets the current base URL needed to download image files from TMDB.
+    """
     if not secrets.TMDB_API_KEY:
         raise ValueError("TMDB_API_KEY is not set!")
 
@@ -41,6 +48,9 @@ def tmdb_img_base_url():
 
 
 def movie_for_tmdb_id(tmdb_id):
+    """
+    Creats a ``Movie`` instance for a movie with the given TMDB ID.
+    """
     tmdb_dict = get_movie_details_dict(tmdb_id)
     
     print tmdb_dict
@@ -51,26 +61,11 @@ def movie_for_tmdb_id(tmdb_id):
     length = tmdb_dict.get('runtime')
     year = tmdb_dict.get('release_date')[0:4]
 
-    list_of_genre_dicts = tmdb_dict.get('genres')
-    genre_list = list()
+    genre_dicts = tmdb_dict.get('genres')
+    genres = list_to_string([g.get('name') for g in genre_dicts])
 
-    for genre_dict in list_of_genre_dicts:
-        genre_list.append(genre_dict.get('name'))
-
-    genres = list_to_string(genre_list)
-
-    #### can the following be replaced with a list comprehension? ######
-    list_of_language_dicts = tmdb_dict.get('spoken_languages')
-
-    language_list = list()
-
-    for language_dict in list_of_language_dicts:
-        language_list.append(language_dict.get('name'))
-
-    languages = list_to_string(language_list)
-    #####################################################################
-
-    print "Languages: " + languages
+    language_dicts = tmdb_dict.get('spoken_languages')
+    languages = list_to_string([l.get('name') for l in language_dicts])
     
     releases_dict = tmdb_dict.get('releases')
     countries_list = releases_dict.get('countries')
@@ -103,7 +98,7 @@ def movie_for_tmdb_id(tmdb_id):
     for crewmember_dict in list_of_crew_dicts:
         if crewmember_dict.get('job') == 'Director':
             directors_list.append(crewmember_dict.get('name'))
-        if crewmember_dict.get('job') == 'Screenplay':
+        if crewmember_dict.get('department') == 'Writing':
             writers_list.append(crewmember_dict.get('name'))            
 
     cast = list_to_string(cast_list)
@@ -146,13 +141,17 @@ def movie_for_tmdb_id(tmdb_id):
             )
 
     movie.save()
-
     
-    return None
+    return movie
 
 
 def list_to_string(list_of_strings):
+    """
+    Converts a list of strings into one comma-delimited string.
 
+    Example:
+    ['a', 'b', 'c'] -> 'a, b, c'
+    """
     if list_of_strings is None or len(list_of_strings) < 1:
         return None
 
