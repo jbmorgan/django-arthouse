@@ -22,22 +22,6 @@ class UserProfile(models.Model):
     post_save.connect(create_user_profile, sender=User)
 
 
-class Person(models.Model):
-    """
-    A ``Person`` is an actor, writer, and/or director.
-    """
-    class Meta:
-        verbose_name = 'Person'
-        verbose_name_plural = 'People' 
-
-    first_name      = models.CharField(max_length=200)
-    last_name       = models.CharField(max_length=200)
-    imdb_url        = models.URLField()
-
-    def __unicode__(self):
-        return u'%s %s' % (self.first_name, self.last_name)
-
-
 class Movie(models.Model):
     """
     A ``Movie`` is a collection of all the information needed to uniquely
