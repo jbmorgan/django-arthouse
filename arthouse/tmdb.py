@@ -116,13 +116,19 @@ def movie_for_tmdb_id(tmdb_id):
     poster_img_url = image_base_url + tmdb_dict.get('poster_path')
     banner_img_url = image_base_url + tmdb_dict.get('backdrop_path')
 
-    # temp_poster_img = NamedTemporaryFile(delete=True)
-    # temp_poster_img.write(urllib2.urlopen(poster_img_url).read())
+    temp_poster_img = NamedTemporaryFile(delete=True)
+    temp_poster_img.write(urlopen(poster_img_url).read())
+    temp_poster_img.flush()
+
+    temp_banner_img = NamedTemporaryFile(delete=True)
+    temp_banner_img.write(urlopen(banner_img_url).read())
+    temp_banner_img.flush()
 
     site_url = tmdb_dict.get('homepage')
     imdb_url = "http://www.imdb.com/title/" + tmdb_dict.get('imdb_id')
 
     movie = models.Movie(   title=title,
+                            tmdb_id=tmdb_id,
                             description=description,
                             slug=slug,
                             genres=genres,
@@ -133,15 +139,15 @@ def movie_for_tmdb_id(tmdb_id):
                             cast=cast,
                             directors=directors,
                             writers=writers,
-                            poster_image=poster_image,
-                            banner_image=banner_image,
                             tile_image=tile_image,
                             site_url=site_url,
                             imdb_url=imdb_url,
             )
 
     movie.save()
-    
+    movie.poster_image.save(tmdb_dict.get('poster_path'), File(temp_poster_img), True)
+    movie.banner_image.save(tmdb_dict.get('backdrop_path'), File(temp_banner_img), True)
+
     return movie
 
 

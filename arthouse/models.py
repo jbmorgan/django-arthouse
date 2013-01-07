@@ -57,6 +57,7 @@ class Movie(models.Model):
     )
 
     title           = models.CharField(max_length=200)
+    tmdb_id         = models.CharField(max_length=64)
     description     = models.TextField(u'description')
     slug            = models.SlugField()
     genres          = models.CharField(max_length=200)
@@ -91,6 +92,15 @@ class Movie(models.Model):
 
     def __unicode__(self):
         return u'%s (%i)' % (self.title, self.year)
+
+    def poster_url(self):
+        return '/media/%s' % self.poster_image.url 
+        
+    def banner_url(self):
+        return '/media/%s' % self.banner_image.url 
+    
+    def tile_url(self):
+        return '/media/%s' % self.tile_image.url    
 
     @models.permalink
     def get_absolute_url(self):
