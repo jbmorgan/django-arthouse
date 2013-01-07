@@ -74,9 +74,8 @@
               var tmdb_id = $(e.target).attr('id');
 
               $.getJSON(tmdb_base_uri + tmdb_id + "?api_key=" + api_key + "&callback=?", function(json) {
-                // console.log(json);
                 $("#id_tmdb_id").val(tmdb_id);
-                // console.log($("#id_tmdb_id").val());
+
                 //submit the form
                 $(".btn-film-submit").click();
               });
