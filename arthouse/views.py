@@ -112,10 +112,9 @@ class MovieCreateView(LoginRequiredMixin, FormView):
         # save the ``Movie``
 
         tmdb_id = form.cleaned_data.get('tmdb_id', None)
-        print tmdb_id
         movie = movie_for_tmdb_id(tmdb_id)
 
-        messages.add_message(self.request, messages.SUCCESS, 'You SIKE SIKE SIKE have successfully created a new movie.')
+        messages.add_message(self.request, messages.SUCCESS, 'You have successfully added ' + movie.title + '.')
         return super(MovieCreateView, self).form_valid(form)
 
 
