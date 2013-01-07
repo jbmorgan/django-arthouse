@@ -5,9 +5,48 @@
 {% block title %} - {{ movie.title }}{% endblock %}
 
 {% block content %}
-
-    {{ movie.title }}
-    <img src="{{ movie.poster_url }}">
-    <img src="{{ movie.banner_url }}">
+	
+	<div class="row">
+		<div class="span12">
+		    <h1>{{ movie.title }}</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span8">
+			<div class="row">
+				<div class="span8">
+					<h2>Details</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span2">
+					<img src="{{ movie.poster_url }}" style="max-width:150px">
+				</div>
+				<div class="span6">
+					Director: {{ movie.directors }} <br/>
+					Cast: {{ movie.cast }} <br/>
+					Runtime: {{ movie.length }} min <br/>
+					Rating: {{ movie.rating }} <br/>
+					Year: {{ movie.year }} <br/>
+					More info: <a href="{{ movie.imdb_url }}">IMDB</a> <br/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span8">
+					{{ movie.description }}
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="row">
+				<h2>Showtimes</h2>
+				Showtimes for today can go here?
+			</div>
+			<div class="row">
+				<h2>More stuff</h2>
+				More stuff can go over here!
+			</div>
+		</div>
+	</div>
 
 {% endblock content %}
