@@ -15,9 +15,9 @@ Requirements
 
 Installation
 ------------
- 1. Copy `arthouse/secrets.py.example` to `arthouse/secrets.py`.
- 2. django-arthouse requires an API key from The Movie Database (available under "API Details" at the [TMDB account page](https://www.themoviedb.org/account)). Copy your API key and save it in `arthouse/secrets.py1
- 3. There's probably other stuff. I'll update this later.
+ 1. Copy `arthouse/secrets.py.example` to `arthouse/secrets.py`
+ 2. django-arthouse requires an API key from The Movie Database (available under "API Details" at the [TMDB account page](https://www.themoviedb.org/account)). Copy your API key and save it in `arthouse/secrets.py`
+ 3. There's probably other stuff. To be continued.
 
 Notes
 -----
