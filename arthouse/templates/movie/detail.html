@@ -23,12 +23,14 @@
 					<img src="{{ movie.poster_url }}" style="max-width:150px">
 				</div>
 				<div class="span5">
-					Director: {{ movie.directors }} <br/>
-					Cast: {{ movie.cast }} <br/>
-					Runtime: {{ movie.length }} min <br/>
-					Rating: {{ movie.rating }} <br/>
-					Year: {{ movie.year }} <br/>
-					More info: <a href="{{ movie.imdb_url }}">IMDB</a> <br/>
+					<dl class="dl-horizontal">
+						<dt>Director</dt> <dd>{{ movie.directors }}</dd>
+						<dt>Cast</dt> <dd>{{ movie.cast }}</dd>
+						<dt>Runtime</dt> <dd>{{ movie.length }} min</dd>
+						<dt>Rating</dt> <dd>{{ movie.rating }}</dd>
+						<dt>Year</dt> <dd>{{ movie.year }}</dd>
+						<dt>More info</dt> <dd><a href="{{ movie.imdb_url }}">IMDB</a></dd>
+					</dl>
 				</div>
 			</div>
 			<div class="row">
