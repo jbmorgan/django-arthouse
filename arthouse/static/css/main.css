@@ -1,6 +1,7 @@
 body {
   padding-top: 		60px;
   padding-bottom:	40px;
+  background-color: whitesmoke;
 }
 
 .film-search-results {
@@ -16,4 +17,12 @@ body {
 
 .film-search-results .title {
 	font-size: 20px;
+}
+
+.movie-list-info {
+	position:relative;
+	top:-2em;
+	background: rgba(0,0,0,.7);
+	z-index: 2;
+	color: #eeeeee;
 }
