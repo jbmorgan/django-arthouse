@@ -160,7 +160,7 @@ def list_to_string(list_of_strings):
     ['a', 'b', 'c'] -> 'a, b, c'
     """
     if list_of_strings is None or len(list_of_strings) < 1:
-        return None
+        return ""
 
     return_string = ""
 
