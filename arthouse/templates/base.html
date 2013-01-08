@@ -36,7 +36,7 @@
                     <a class="brand" href="{% url 'arthouse:home_url' %}">Theater Name</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li><a href="{% url 'arthouse:about_url' %}">About</a></li>
+                            <li><a href="{% url 'arthouse:movie_list_url' %}">Movies</a></li>
                             {% if user.is_authenticated %}
                                 <li><a href="#">AuthenticatedOption1</a></li>
                                 <li><a href="#">AuthenticatedOption2</a></li>
