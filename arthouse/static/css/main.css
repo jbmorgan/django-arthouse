@@ -8,37 +8,37 @@ body {
 	padding-bottom: 10px;
 	padding-top: 	10px;
 	height: 		136px;
-	border-top:	1px solid #dddddd;
+	border-top:		1px solid #dddddd;
 }
 
 .film-search-results img {
-	max-height: 136px;
+	max-height: 	136px;
 }
 
 .film-search-results .title {
-	font-size: 20px;
+	font-size: 		20px;
 }
 
 .movie-list-info {
-	position:relative;
-	top:-2em;
-	background: rgba(0,0,0,.7);
-	z-index: 2;
-	color: #eeeeee;
+	position:		relative;
+	top:			-2em;
+	background: 	rgba(0,0,0,.7);
+	z-index: 		2;
+	color: 			#eeeeee;
 }
 
 .movie-detail h1 { 
-	border-bottom: 1px solid #dddddd;
+	border-bottom: 	1px solid #dddddd;
 }
 
 .movie-detail h2 { 
-	border-bottom: 1px solid #dddddd;
+	border-bottom: 	1px solid #dddddd;
 }
 
 .dl-horizontal dt {
-	width: 80px;
+	width: 			80px;
 }
 
 .dl-horizontal dd {
-margin-left: 90px;
+margin-left: 		90px;
 }

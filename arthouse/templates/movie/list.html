@@ -25,3 +25,19 @@
 	</a>
 </div>
 {% endblock content %}
+
+{% block body_js %}
+    <script>
+        !function ($) {
+
+        	$(".movie-list-info").each(function(index, element) {
+
+        		// for any movie title long enough to fill more than one line,
+        		// replace the last word with an elipsis until it's just one line
+        		while($(element).height() > 20)
+        			$(element).text( $(element).text().replace(/\W*\s(\S)*$/, '…'));
+        	});
+
+        }(window.jQuery)
+    </script>
+{% endblock body_js %}
