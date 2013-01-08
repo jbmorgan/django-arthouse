@@ -10,12 +10,18 @@
 	{% for movie in movies %}
 		<a href="{{ movie.get_absolute_url }}">
 			<div class="span4">
-				<img src="{{ movie.banner_url }}" class="img-rounded">
+				<img src="{{ movie.banner_url }}" class="img-rounded" style="max-height:169px; max-width:300px;">
 				<div class="movie-list-info"> {{ movie.title }}</div>
 			</div>
 		</a>
 	{% empty %}
     <div class="span12">No movies exist in the system.</div>
-{% endfor %}
+	{% endfor %}
+	<a href="{% url 'arthouse:movie_create_url' %}">
+		<div class="span4">
+			<img src="{{ STATIC_URL }}img/movie-tile-blank.png" class="img-rounded">
+			<div class="movie-list-info">Add a movie</div>
+		</div>
+	</a>
 </div>
 {% endblock content %}
