@@ -72,7 +72,7 @@ def movie_for_tmdb_id(tmdb_id):
 
     CINEMA_REGION = 'US' # this should be a cinema setting in the future
 
-    rating = None
+    rating = 'NR' # The default assumption is that the film is Not Rated
 
     for country_dict in countries_list:
         if country_dict.get('iso_3166_1') == CINEMA_REGION:
