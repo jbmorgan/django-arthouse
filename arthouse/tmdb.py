@@ -72,12 +72,15 @@ def movie_for_tmdb_id(tmdb_id):
 
     CINEMA_REGION = 'US' # this should be a cinema setting in the future
 
-    rating = 'NR' # The default assumption is that the film is Not Rated
+    rating = None 
 
     for country_dict in countries_list:
         if country_dict.get('iso_3166_1') == CINEMA_REGION:
             rating = country_dict.get('certification')
             break
+
+    if rating is None or len(rating) < 1:
+        rating = 'NR' # The default assumption is that the film is Not Rated
 
     casts_dict = tmdb_dict.get('casts')
 
@@ -104,8 +107,6 @@ def movie_for_tmdb_id(tmdb_id):
     cast = list_to_string(cast_list)
     directors = list_to_string(directors_list)
     writers = list_to_string(writers_list)
-
-    print "Cast: " + cast
 
     poster_image = None
     banner_image = None
