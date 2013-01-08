@@ -26,3 +26,11 @@ body {
 	z-index: 2;
 	color: #eeeeee;
 }
+
+.movie-detail h1 { 
+	border-bottom: 1px solid #dddddd;
+}
+
+.movie-detail h2 { 
+	border-bottom: 1px solid #dddddd;
+}

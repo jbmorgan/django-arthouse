@@ -6,15 +6,15 @@
 
 {% block content %}
 	
-	<div class="row">
+	<div class="row movie-detail">
 		<div class="span12">
 		    <h1>{{ movie.title }}</h1>
 		</div>
 	</div>
-	<div class="row">
-		<div class="span8">
+	<div class="row movie-detail">
+		<div class="span7">
 			<div class="row">
-				<div class="span8">
+				<div class="span7">
 					<h2>Details</h2>
 				</div>
 			</div>
@@ -22,7 +22,7 @@
 				<div class="span2">
 					<img src="{{ movie.poster_url }}" style="max-width:150px">
 				</div>
-				<div class="span6">
+				<div class="span5">
 					Director: {{ movie.directors }} <br/>
 					Cast: {{ movie.cast }} <br/>
 					Runtime: {{ movie.length }} min <br/>
@@ -32,12 +32,12 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="span8">
+				<div class="span7">
 					{{ movie.description }}
 				</div>
 			</div>
 		</div>
-		<div class="span4">
+		<div class="span4 offset1">
 			<div class="row">
 				<h2>Showtimes</h2>
 				Showtimes for today can go here?
