@@ -22,13 +22,14 @@ class UserUpdateForm(BootstrapPasswordChangeForm):
             raise ValidationError('Password must be at least 6 characters long.')
         return super(UserUpdateForm, self).clean_new_password2()
 
+
 class MovieCreateForm(BootstrapModelForm):
     """
     Used by ``MovieCreateView`` to allow users to create a new ``Movie``.
     """
-
     class Meta:
         model = models.Movie
+
 
 class TMDBMovieAddForm(Form):
     tmdb_id = forms.CharField(max_length=200)

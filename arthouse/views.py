@@ -95,7 +95,7 @@ class AccountCreateView(CreateView):
 
 class MovieAddView(LoginRequiredMixin, FormView):
     """
-    Create a ``Movie``.
+    Add a ``Movie`` from TMDB.
     """
     template_name = 'movie/add.html'
     form_class = forms.TMDBMovieAddForm
@@ -105,12 +105,6 @@ class MovieAddView(LoginRequiredMixin, FormView):
         """
         Add success message when the form is valid.
         """
-        # look up the movie on TMDB
-        # download the poster image
-        # instantiate a ``MovieCreateForm`` with the movie's data
-        # validate the form
-        # save the ``Movie``
-
         tmdb_id = form.cleaned_data.get('tmdb_id', None)
         movie = movie_for_tmdb_id(tmdb_id)
 
@@ -118,9 +112,27 @@ class MovieAddView(LoginRequiredMixin, FormView):
         return super(MovieAddView, self).form_valid(form)
 
 
+class MovieCreateView(LoginRequiredMixin, CreateView):
+    """
+    Create a custom movie, specifically one without information available on
+    TMDB.
+    """
+    model = models.Movie
+    template_name = 'movie/create.html'
+    form_class = forms.MovieCreateForm
+    success_url = '/movies/'
+
+    def form_valid(self, form):
+        """
+        Add success message when the form is valid.
+        """
+        messages.add_message(self.request, messages.SUCCESS, 'You have successfully created a new movie.')
+        return super(MovieCreateView, self).form_valid(form)
+
+
 class MovieDetail(DetailView):
     """
-
+    Shows the detailed information for a single ``Movie``.
     """
     model = models.Movie
     pk_url_kwarg = 'movie_pk'
