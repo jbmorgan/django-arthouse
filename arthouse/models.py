@@ -41,7 +41,7 @@ class Movie(models.Model):
     )
 
     title           = models.CharField(max_length=200)
-    tmdb_id         = models.CharField(max_length=64)
+    tmdb_id         = models.CharField(max_length=64, blank=True)
     description     = models.TextField(u'description')
     slug            = models.SlugField()
     genres          = models.CharField(max_length=200)
@@ -51,9 +51,9 @@ class Movie(models.Model):
     rating          = models.CharField(max_length=12)
     languages       = models.CharField(max_length=200)
 
-    directors       = models.CharField(max_length=512)
-    writers         = models.CharField(max_length=512)
-    cast            = models.CharField(max_length=512)
+    directors       = models.CharField(max_length=512, blank=True)
+    writers         = models.CharField(max_length=512, blank=True)
+    cast            = models.CharField(max_length=512, blank=True)
 
     poster_image    = models.ImageField(    u'poster image', 
                                             upload_to='posters', 
@@ -66,13 +66,14 @@ class Movie(models.Model):
                                             storage=fs, 
                                             blank=True, 
                                             null=True)
+
     tile_image      = models.ImageField(    u'tile image', 
                                             upload_to='tiles', 
                                             storage=fs, 
                                             blank=True, 
                                             null=True)
-    site_url        = models.URLField()
-    imdb_url        = models.URLField()
+    site_url        = models.URLField(blank=True)
+    imdb_url        = models.URLField(blank=True)
 
     def __unicode__(self):
         return u'%s (%i)' % (self.title, self.year)
