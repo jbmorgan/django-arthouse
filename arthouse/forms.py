@@ -30,5 +30,5 @@ class MovieCreateForm(BootstrapModelForm):
     class Meta:
         model = models.Movie
 
-class TMDBMovieCreateForm(Form):
+class TMDBMovieAddForm(Form):
     tmdb_id = forms.CharField(max_length=200)

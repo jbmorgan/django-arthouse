@@ -17,7 +17,7 @@
 	{% empty %}
     <div class="span12">No movies exist in the system.</div>
 	{% endfor %}
-	<a href="{% url 'arthouse:movie_create_url' %}">
+	<a href="{% url 'arthouse:movie_add_url' %}">
 		<div class="span4">
 			<img src="{{ STATIC_URL }}img/movie-tile-blank.png" class="img-rounded">
 			<div class="movie-list-info">Add a movie</div>

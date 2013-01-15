@@ -17,7 +17,8 @@ urlpatterns = patterns('',
 
     url(r'^movies/$', views.MovieList.as_view(), name='movie_list_url'),
     url(r'^movies/(?P<movie_pk>\d+)/$', views.MovieDetail.as_view(), name='movie_detail_url'),
-    url(r'^movies/create/$', views.MovieCreateView.as_view(), name='movie_create_url'),
+    url(r'^movies/add/$', views.MovieAddView.as_view(), name='movie_add_url'),
+    # url(r'^movies/create/$', views.MovieCreateView.as_view(), name='movie_create_url'),
 
 )
 

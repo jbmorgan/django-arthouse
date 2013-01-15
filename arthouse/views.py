@@ -93,12 +93,12 @@ class AccountCreateView(CreateView):
     success_url = reverse_lazy('arthouse:home_url')
 
 
-class MovieCreateView(LoginRequiredMixin, FormView):
+class MovieAddView(LoginRequiredMixin, FormView):
     """
     Create a ``Movie``.
     """
-    template_name = 'movie/create.html'
-    form_class = forms.TMDBMovieCreateForm
+    template_name = 'movie/add.html'
+    form_class = forms.TMDBMovieAddForm
     success_url = reverse_lazy('arthouse:movie_list_url')
 
     def form_valid(self, form):
@@ -115,7 +115,7 @@ class MovieCreateView(LoginRequiredMixin, FormView):
         movie = movie_for_tmdb_id(tmdb_id)
 
         messages.add_message(self.request, messages.SUCCESS, 'You have successfully added ' + movie.title + '.')
-        return super(MovieCreateView, self).form_valid(form)
+        return super(MovieAddView, self).form_valid(form)
 
 
 class MovieDetail(DetailView):
