@@ -40,28 +40,30 @@
               var tmdb_base_uri = "http://api.themoviedb.org/2.1/Movie.search/en/json/"
 
               $.getJSON(tmdb_base_uri + api_key + "/" + film + "?callback=?", function(json) {
-                console.log(json);
 
                 var $results_div = $("#id-results-container");
                 $results_div.empty();
 
-                $(json).each(function (index, element) {
+                if(json["0"] === "Nothing found.") {
+                  $results_div.append("<div class='row film-search-results'><div class='span12'>No results found.</div></div>");
+                } else {
+                  $(json).each(function (index, element) {
 
-                  var poster_src = "",
-                      title = element.name,
-                      release_date = element.released,
-                      description = element.overview,
-                      tmdb_id = element.id;
+                    var poster_src = "",
+                        title = element.name,
+                        release_date = element.released,
+                        description = element.overview,
+                        tmdb_id = element.id;
 
-                  if(description.length > 350)
-                    description = description.substring(0,350) + "…";
+                    if(description.length > 350)
+                      description = description.substring(0,350) + "…";
 
-                  if(element.posters.length > 0)
-                    poster_src = element.posters[0].image.url;
+                    if(element.posters.length > 0)
+                      poster_src = element.posters[0].image.url;
 
-                  $results_div.append("<div class='row film-search-results'><div class='span2'><img src='" + poster_src + "'></div><div class='span8'><p class='title'>" + title + "</p> <p>Release date: " + release_date + "</p><p>" + description + "</p></div><div class='span2'><button type='button' class='btn btn-large btn-primary btn-film-select' id='" + tmdb_id + "'>Select</button></div></div>");
-                });
-
+                    $results_div.append("<div class='row film-search-results'><div class='span2'><img src='" + poster_src + "'></div><div class='span8'><p class='title'>" + title + "</p> <p>Release date: " + release_date + "</p><p>" + description + "</p></div><div class='span2'><button type='button' class='btn btn-large btn-primary btn-film-select' id='" + tmdb_id + "'>Select</button></div></div>");
+                  });
+                }
               });
             });
 
